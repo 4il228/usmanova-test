@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)blob:https://usmanovafit.gymteam.ru/51b9d8b6-ae0d-4086-8124-2b018f94ed9f -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Google Sans', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 14px; color: #e3e3e3; background: #1e1f20; height: 100vh; overflow: hidden;
+    }
+    .panel { display: flex; flex-direction: column; height: 100vh; background: #1e1f20; }
+    .panel.hidden { display: none; }
+
+    /* Header */
+    .header {
+      padding: 16px 20px; background: #282a2c; border-bottom: 1px solid #3c3f41;
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+    }
+    .header-icon {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #fff; font-weight: 700;
+    }
+    .header-text h1 { font-size: 15px; font-weight: 500; color: #e3e3e3; margin: 0; }
+    .header-text p { font-size: 11px; color: #9aa0a6; margin: 2px 0 0 0; }
+    #model-badge {
+      display: inline-block; padding: 1px 7px; border-radius: 8px;
+      background: rgba(66, 133, 244, 0.15); color: #8ab4f8;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.3px;
+      transition: all 0.3s ease;
+    }
+
+    /* Model selector */
+    .model-selector {
+      position: relative; display: inline-flex; align-items: center; gap: 4px;
+      cursor: pointer; margin-top: 3px;
+    }
+    .model-selector:hover #model-badge {
+      background: rgba(66, 133, 244, 0.25);
+    }
+    .model-chevron {
+      color: #8ab4f8; transition: transform 0.2s ease; flex-shrink: 0;
+    }
+    .model-selector.open .model-chevron {
+      transform: rotate(180deg);
+    }
+    .model-dropdown {
+      display: none; position: absolute; top: calc(100% + 6px); left: 0;
+      min-width: 200px; background: #2d2f31; border: 1px solid #3c3f41;
+      border-radius: 10px; padding: 4px; z-index: 10;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      animation: dropIn 0.15s ease;
+    }
+    .model-selector.open .model-dropdown {
+      display: block;
+    }
+    @keyframes dropIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .model-option {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: 8px;
+      font-size: 12px; color: #e3e3e3; cursor: pointer;
+      transition: background 0.15s;
+    }
+    .model-option:hover {
+      background: rgba(255,255,255,0.06);
+    }
+    .model-option.active {
+      background: rgba(66, 133, 244, 0.15); color: #8ab4f8;
+    }
+    .model-option .model-dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+      background: #5f6368;
+    }
+    .model-option.active .model-dot {
+      background: #8ab4f8;
+    }
+    .model-option-name {
+      font-weight: 500;
+    }
+    .model-option-tag {
+      font-size: 9px; color: #9aa0a6; margin-left: auto;
+      padding: 1px 5px; border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Messages */
+    .messages {
+      flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px;
+      scroll-behavior: smooth;
+    }
+    .messages::-webkit-scrollbar { width: 6px; }
+    .messages::-webkit-scrollbar-track { background: transparent; }
+    .messages::-webkit-scrollbar-thumb { background: #5f6368; border-radius: 3px; }
+    .messages::-webkit-scrollbar-thumb:hover { background: #80868b; }
+
+    /* Empty state */
+    .empty {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; color: #9aa0a6; text-align: center; padding: 40px 20px;
+    }
+    .empty-icon {
+      width: 72px; height: 72px; border-radius: 50%; margin-bottom: 20px;
+      background: linear-gradient(135deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; opacity: 0.85;
+    }
+    .header-icon.thinking {
+      animation: iconSpin 2s linear infinite;
+    }
+    @keyframes iconSpin {
+      0% { filter: hue-rotate(0deg); transform: scale(1); }
+      50% { filter: hue-rotate(60deg); transform: scale(1.05); }
+      100% { filter: hue-rotate(0deg); transform: scale(1); }
+    }
+    .empty h2 { font-size: 18px; font-weight: 500; color: #e3e3e3; margin-bottom: 8px; }
+    .empty p { font-size: 13px; color: #9aa0a6; line-height: 1.6; }
+
+    /* Messages */
+    .msg {
+      padding: 12px 16px; border-radius: 18px; max-width: 85%;
+      word-wrap: break-word; line-height: 1.6; font-size: 14px;
+      animation: fadeIn 0.15s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; } }
+    .msg.user {
+      align-self: flex-end; background: #1a73e8; color: #fff;
+      border-bottom-right-radius: 6px;
+    }
+    .msg.bot {
+      align-self: flex-start; background: #282a2c; color: #e3e3e3;
+      border-bottom-left-radius: 6px; line-height: 1.7;
+    }
+    .msg.bot h1 { font-size: 18px; font-weight: 700; color: #fff; margin: 12px 0 6px; }
+    .msg.bot h2 { font-size: 16px; font-weight: 600; color: #fff; margin: 10px 0 5px; }
+    .msg.bot h3 { font-size: 14px; font-weight: 600; color: #e8eaed; margin: 8px 0 4px; }
+    .msg.bot h4, .msg.bot h5, .msg.bot h6 { font-size: 13px; font-weight: 600; color: #c4c7cc; margin: 6px 0 3px; }
+    .msg.bot code {
+      background: #3c3f41; padding: 2px 6px; border-radius: 4px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 13px; color: #8ab4f8;
+    }
+    .msg.bot pre {
+      background: #1a1b1c; color: #e3e3e3; padding: 14px; border-radius: 8px;
+      overflow-x: auto; margin: 10px 0; border: 1px solid #3c3f41;
+      position: relative;
+    }
+    .msg.bot pre code { background: none; padding: 0; color: inherit; font-size: 12px; line-height: 1.5; }
+    .msg.bot pre code::before { content: attr(class); position: absolute; top: 6px; right: 10px; font-size: 10px; color: #5f6368; text-transform: uppercase; }
+    .msg.bot strong { color: #e8eaed; font-weight: 600; }
+    .msg.bot em { color: #c4c7cc; font-style: italic; }
+    .msg.bot del { color: #80868b; text-decoration: line-through; }
+    .msg.bot ul, .msg.bot ol { padding-left: 20px; margin: 6px 0; }
+    .msg.bot li { margin: 3px 0; }
+    .msg.bot li::marker { color: #8ab4f8; }
+    .msg.bot blockquote {
+      border-left: 3px solid #8ab4f8; padding: 6px 12px; margin: 8px 0;
+      background: rgba(138, 180, 248, 0.06); border-radius: 0 6px 6px 0;
+      color: #c4c7cc;
+    }
+    .msg.bot hr {
+      border: none; border-top: 1px solid #3c3f41; margin: 10px 0;
+    }
+    .msg.bot a {
+      color: #8ab4f8; text-decoration: none;
+    }
+    .msg.bot a:hover { text-decoration: underline; }
+    .msg.bot .math-block {
+      display: block; text-align: center; padding: 12px 16px; margin: 10px 0;
+      background: rgba(138, 180, 248, 0.06); border: 1px solid rgba(138, 180, 248, 0.15);
+      border-radius: 8px; font-family: 'JetBrains Mono', 'Fira Code', 'Cambria Math', monospace;
+      font-size: 13px; color: #c4c7cc; overflow-x: auto; white-space: nowrap;
+    }
+    .msg.bot .math-inline {
+      padding: 1px 5px; border-radius: 4px;
+      background: rgba(138, 180, 248, 0.08);
+      font-family: 'JetBrains Mono', 'Fira Code', 'Cambria Math', monospace;
+      font-size: 13px; color: #c4c7cc;
+    }
+
+    /* Error */
+    .error {
+      color: #f28b82; padding: 12px 16px; text-align: center; font-size: 13px;
+      background: rgba(242, 139, 130, 0.08); border-radius: 8px; border: 1px solid rgba(242, 139, 130, 0.15);
+    }
+
+    /* Input */
+    .input-area {
+      padding: 12px 16px 16px; border-top: 1px solid #3c3f41; background: #1e1f20; flex-shrink: 0;
+    }
+    .input-box {
+      display: flex; gap: 8px; align-items: flex-end; background: #282a2c;
+      border: 1px solid #3c3f41; border-radius: 16px; padding: 10px 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .input-box:focus-within {
+      border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.15);
+    }
+    .input-box textarea {
+      flex: 1; background: transparent; color: #e3e3e3; border: none; outline: none;
+      font-family: inherit; font-size: 14px; resize: none;
+      min-height: 24px; max-height: 120px; line-height: 1.5; padding: 2px 0;
+    }
+    .input-box textarea::placeholder { color: #80868b; }
+    .send-btn {
+      width: 36px; height: 36px; border-radius: 50%; background: #1a73e8;
+      color: #fff; border: none; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .send-btn:hover { background: #1557b0; transform: scale(1.05); }
+    .send-btn:active { transform: scale(0.95); }
+    .send-btn:disabled { background: #3c3f41; color: #80868b; cursor: not-allowed; transform: none; }
+    .send-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .stop-btn {
+      width: 36px; height: 36px; border-radius: 50%; background: #ea4335;
+      color: #fff; border: none; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s, transform 0.15s;
+      animation: stopPulse 1.5s ease-in-out infinite;
+    }
+    .stop-btn:hover { background: #c5221f; transform: scale(1.05); }
+    .stop-btn:active { transform: scale(0.95); }
+    .stop-btn svg { width: 16px; height: 16px; fill: currentColor; }
+    @keyframes stopPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(234, 67, 53, 0); }
+    }
+
+    /* Analyze checkbox */
+    .analyze-bar {
+      padding: 8px 16px; border-top: 1px solid #3c3f41; background: #282a2c;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .analyze-label {
+      display: flex; align-items: center; gap: 8px; font-size: 13px;
+      color: #9aa0a6; cursor: pointer; user-select: none;
+    }
+    .analyze-bar input[type="checkbox"] {
+      width: 14px; height: 14px; accent-color: #1a73e8; cursor: pointer;
+    }
+    .analyze-text { font-weight: 500; color: #e3e3e3; }
+    .analyze-info {
+      font-size: 10px; color: #80868b; padding: 2px 8px;
+      background: rgba(255,255,255,0.04); border-radius: 6px;
+    }
+
+    /* Thinking phase */
+    .phase-indicator {
+      display: flex; align-items: center; gap: 10px; padding: 0;
+      animation: fadeIn 0.3s ease;
+    }
+    .phase-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      animation: phasePulse 1.2s ease-in-out infinite;
+    }
+    .phase-dot.think { background: #4285f4; }
+    .phase-dot.analyze { background: #34a853; }
+    .phase-dot.form { background: #fbbc05; }
+    @keyframes phasePulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; box-shadow: 0 0 0 0 currentColor; }
+      50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 8px 2px currentColor; }
+    }
+    .phase-text {
+      font-size: 13px; color: #9aa0a6; font-style: italic;
+    }
+    .phase-text span {
+      display: inline-block;
+    }
+    .phase-text span.dot-anim::after {
+      content: '';
+      animation: dotAppear 1.5s ease-in-out infinite;
+    }
+    @keyframes dotAppear {
+      0% { content: ''; }
+      25% { content: '.'; }
+      50% { content: '..'; }
+      75% { content: '...'; }
+      100% { content: ''; }
+    }
+
+    /* Streaming with cursor */
+    .streaming-cursor::after {
+      content: '';
+      display: inline-block;
+      width: 2px; height: 1em;
+      background: #8ab4f8;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: cursorBlink 0.8s step-end infinite;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Shimmer loading bar */
+    .shimmer-bar {
+      width: 100%; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, transparent 0%, #4285f4 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s ease-in-out infinite;
+      margin-top: 8px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Floating dots (idle animation) */
+    .idle-dots {
+      display: inline-flex; gap: 5px; padding: 4px 0;
+    }
+    .idle-dots span {
+      width: 5px; height: 5px; background: #80868b; border-radius: 50%;
+      animation: idleFloat 2s ease-in-out infinite;
+    }
+    .idle-dots span:nth-child(2) { animation-delay: 0.3s; }
+    .idle-dots span:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes idleFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+      50% { transform: translateY(-6px) scale(1.2); opacity: 0.8; }
+    }
+
+    /* Success checkmark */
+    .success-check {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: #34a853; font-size: 12px;
+      animation: checkPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes checkPop {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style></head><body>
+    <div class="panel" id="panel">
+      <div class="header">
+        <div class="header-icon">G</div>
+        <div class="header-text">
+          <h1>Gemini Agent</h1>
+          <div class="model-selector" id="model-selector">
+            <span id="model-badge">Gemini 2.5 Flash</span>
+            <svg class="model-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg>
+            <div class="model-dropdown" id="model-dropdown"><div class="model-option active"><span class="model-dot"></span><span class="model-name">Gemini 2.5 Flash</span><span class="model-option-tag">Fast</span></div><div class="model-option"><span class="model-dot"></span><span class="model-name">Gemini 3.5 Flash</span><span class="model-option-tag">Latest</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="messages" id="messages">
+        <div class="empty" id="empty-state">
+          <div class="empty-icon">✦</div>
+          <h2>Hi there!</h2>
+          <p>Ask me anything about this page</p>
+        </div>
+      </div>
+      <div id="analyze-bar" class="analyze-bar"><label class="analyze-label"><input type="checkbox" id="analyze-cb"><span class="analyze-text">Analyze page</span></label><span class="analyze-info">full page · 1M tokens</span></div><div class="input-area">
+        <div class="input-box">
+          <textarea id="user-input" placeholder="Message Gemini..." rows="1"></textarea>
+          <button class="send-btn" id="send-btn">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+          </button>
+          <button class="stop-btn" id="stop-btn" style="display:none">
+            <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"></rect></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body></html>

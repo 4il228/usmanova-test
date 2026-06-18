@@ -5,7 +5,7 @@ jQuery.widget('gc.phoneConfirmField', $.gc.abstractField, {
         var captchaEnabled = !window.disableCaptchaForConfirmPhone;
 
         if (captchaEnabled) {
-            $('<script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>').appendTo($('body'));
+            // reCAPTCHA disabled for local mode
         }
 
         this.input = $( '<input type="text" name="' +  this.options.field.fieldName + '" size=4 placeholder="Введите код подтверждения"/>')
@@ -16,8 +16,7 @@ jQuery.widget('gc.phoneConfirmField', $.gc.abstractField, {
         this.buttonsEl = $('<div style="padding-top: 10px; padding-bottom: 10px;"/>');
 
         if (captchaEnabled) {
-            this.captcha = $('<div class="g-recaptcha" data-sitekey="6LedcXoUAAAAALSIjF8UgtAgz0J6JwkbFW2mZiTI"></div>');
-            this.captcha.appendTo(this.buttonsEl);
+            // reCAPTCHA disabled for local mode
         }
 
         this.sendSmsLink = $( "<a href='javascript:void(0)' class='btn btn-sm btn-primary' style='margin-right: 10px;'>Получить код</a>");

@@ -7,6 +7,11 @@ function ajaxCall(url, data, options, successCallback, completeCallback, errorCa
         return;
     }
 
+    var apiBase = window.API_BASE || '';
+    if (apiBase && url.indexOf('/') === 0 && url.indexOf('//') !== 0) {
+        url = apiBase + url;
+    }
+
     var suppressErrors = undefined === options.suppressErrors ? false :options.suppressErrors;
 	var enableCsrf = undefined === options.enableCsrf ? false :options.enableCsrf;
 	var enableSimpleSign = undefined === options.enableSimpleSign ? false :options.enableSimpleSign;
@@ -310,7 +315,7 @@ function sendError(message) {
     window.errCount++;
     if (window.errCount <= 10) {
         $.ajax({
-            url: '/pl/gc/log',
+            url: (window.API_BASE || '') + '/pl/gc/log',
             method: 'POST',
             data: {data:  message}
         });
@@ -364,7 +369,7 @@ function getUploadifySecretLink(filesToUpload, settings) {
     }
 
     $.ajax({
-        url: '/fileservice/widget/create-secret-link',
+        url: (window.API_BASE || '') + '/fileservice/widget/create-secret-link',
         method: 'GET',
         data: {
             host: window.fileserviceUploadHost,
@@ -391,7 +396,7 @@ function panelPutTaskAside( task_id ) {
     $('.aside-loading').css('opacity', 1);
     $('.aside-link').css('opacity', 0).css('cursor', 'default');
     $.ajax({
-        url: '/tasks/control/task/setNew',
+        url: (window.API_BASE || '') + '/tasks/control/task/setNew',
         method: 'post',
         data: {'id': task_id },
         success: function(data) {
@@ -402,7 +407,7 @@ function panelPutTaskAside( task_id ) {
 function panelFinishTask( task_id, result ) {
     $('.aside-loading').css('opacity', 1);
     $.ajax({
-        url: '/tasks/control/task/setCompleted',
+        url: (window.API_BASE || '') + '/tasks/control/task/setCompleted',
         method: 'post',
         data: {'id': task_id, result: result },
         success: function(data) {
@@ -415,7 +420,7 @@ function panelFinishTask( task_id, result ) {
 
 function panelLoad() {
     $.ajax({
-        url: '/tasks/control/task/getPanel',
+        url: (window.API_BASE || '') + '/tasks/control/task/getPanel',
     success: function(data) {
         $('#task-panel-placeholder').html( data );
         }
@@ -1144,7 +1149,7 @@ function number_format( number, decimals, dec_point, thousands_sep ) {	// Format
 
 
 function onTelegramAuth(user) {
-    ajaxCall( "/pl/user/profile/login-with-telegram", { user: user }, {method: 'get'}, function( response ) {
+    ajaxCall( (window.API_BASE || '') + "/pl/user/profile/login-with-telegram", { user: user }, {method: 'get'}, function( response ) {
         if ( window.afterTelegramAuthCallback ) {
             window.afterTelegramAuthCallback();
         }
@@ -1156,7 +1161,7 @@ window.phoneChecked = false;
 window.checkFormPhone = function(form) {
     var phoneInput = $(form).find('input.phone-input')
     if ( phoneInput.length > 0 && ! window.phoneChecked ) {
-        ajaxCall( "/pl/user/profile/set-phone", { phone: phoneInput.val() }, {}, function( response ) {
+        ajaxCall( (window.API_BASE || '') + "/pl/user/profile/set-phone", { phone: phoneInput.val() }, {}, function( response ) {
             if ( response.data.success) {
                 window.phoneChecked = true;
                 $(form).submit()

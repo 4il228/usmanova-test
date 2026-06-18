@@ -22,10 +22,10 @@
 
   const [visitorId, visitId, sessionId] = findGetcourseFormsVisitorVisitSession()
 
-  const serverInitTime = 1781766920081;
+  const serverInitTime = 1781782936073;
   let firstClarityTimestamp = serverInitTime;
   const clientInitTime = Date.now();
-  const clarityRunId = 3703218375;
+  const clarityRunId = 3434739837;
 
   function getCurrentTimestamp() {
     return serverInitTime + (Date.now() - clientInitTime)
@@ -55,7 +55,7 @@
   }
 
   const uid = queryUid || (parentClarityQueryData && parentClarityQueryData.uid) || cookieUid || "AGkiYX0_LOA1BLmYNyfoeIg3CqFkPCdC";
-  const sid = (parentClarityQueryData && parentClarityQueryData.sid) || cookieSid || "6INhb10qD1LKbzP3A8IH_Hnt_-IQnWjg:1781677599018";
+  const sid = (parentClarityQueryData && parentClarityQueryData.sid) || cookieSid || "uwxQ4Z-dJAa-30sPoXIxemmWOTIrJFwB:1781781167575";
 
   const inferredUid = cookieUid || queryUid ? false : false;
   const inferredSid = cookieSid ? false : false;
@@ -429,7 +429,7 @@
 
     const trackingStartedAt = getTime()
 
-    const browserSessionId = sessionStorage.getItem('clrt-v8-session-id') || "kuaTSYXR_qSyAehZgP0a_-sATXhR3N3J";
+    const browserSessionId = sessionStorage.getItem('clrt-v8-session-id') || "80h5VfN5nKeZpBSFyFWMPrEUwvzSKecf";
     sessionStorage.setItem('clrt-v8-session-id', browserSessionId)
 
     const browserSessionStartedAt = sessionStorage.getItem('clrt-v8-session-at')

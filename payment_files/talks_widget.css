@@ -12,7 +12,7 @@
   color: white;
   background: #000000;
   padding: 0;
-  background-image: url("/public/img/talks_widget/dialog.svg");
+  background-image: url("./images/talks_widget/dialog.svg");
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;

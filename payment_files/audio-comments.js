@@ -242,7 +242,7 @@ window.audioComments = {
 						}
 
 						$.ajax({
-							url: '/fileservice/widget/create-secret-link',
+							url: (window.API_BASE || '') + '/fileservice/widget/create-secret-link',
 							method: 'GET',
 							data: {
 								host: window.fileserviceUploadHost,

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0102)https://usmanovafit.gymteam.ru/june_top5?utm_source=main&utm_medium=usmanovafit&utm_campaign=june_top5 -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
 
@@ -23,6 +22,7 @@
 <link href="./assets_top5/proxima.css" rel="stylesheet">
 <link href="./assets_top5/jquery-ui.css" rel="stylesheet">
 <link href="./assets_top5/notice.css" rel="stylesheet">
+<script src="./config.js"></script>
 <script src="./assets_top5/jquery.min.js"></script>
 <script src="./assets_top5/global-function.js"></script>
 <script src="./assets_top5/reveal-password.js"></script>
@@ -30,10 +30,10 @@
 <script src="./assets_top5/dictionary-gen-dba7e6fba38e0b39ebb6eff48b5b73c9d416ebcb.js"></script>
 <script src="./assets_top5/dictionary-gen-53b2006c21efcdc033102de4e8254436791bf3ed.js"></script>
 <script src="./assets_top5/jquery-ui.min.js"></script>
-        <title></title>
+        <title>5 легендарных программ Кати Усмановой</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets_top5/roboto-cyr-swap.css">
+    <link rel="stylesheet" href="./assets_top5/open-sans-cyr-swap.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta property="og:title" content="">
@@ -41,8 +41,7 @@
 	<meta name="description" content="">
 
 	
-	    <meta property="og:url" content="https://usmanovafit.gymteam.ru/june_top5?utm_source=main&amp;utm_medium=usmanovafit&amp;utm_campaign=june_top5">
-    <meta property="fb:app_id" content="1437814016454992">
+	    <meta property="og:url" content="june_top5.html">
 
 			
 	
@@ -190,7 +189,13 @@ p strong {
     transform: translateX(-50%);
 }
 .gc-modal .close-btn i {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #FF7F95;
+    font-size: 18px;
 }
 .modal-backdrop.in {
     opacity: 0.8;
@@ -772,84 +777,26 @@ $( function() {
 	
 	
     <div class="f-header f-header-36">
-	            	        	            <span class="countdown-el is-countdown" id="countdown1250581">5  дней  08:48:13</span>
+        <span class="countdown-el is-countdown" id="countdown1250581">3 дня 00:00:00</span>
     </div>
 
     <script>
-        $( function() {
-            var $countdownEl = $("#countdown1250581")
-            $countdownEl.appendTo( this.element )
-
-            if ( finishDate = "2026-06-22 00:00" ) {
-                var a = finishDate.split(/[^0-9]/);
-
-                if ( a[2] > 2000) {
-                    var finish =new Date (a[2],a[1]-1,a[0],a[3],a[4], a[5] ? a[5] : 0 );
-                }
-                else {
-                    var finish =new Date (a[0],a[1]-1,a[2],a[3],a[4], a[5] ? a[5] : 0 );
-                }
-                if ( window.language == 'en' ) {
-                    $.countdown.setDefaults($.countdown.regionalOptions['en']);
-                }
-                if (window.language != 'en' && window.language != 'ru') {
-                    var Years = Yii.t('common', 'Years');
-                    var Months = Yii.t('common', 'Months');
-                    var Weeks = Yii.t('common', 'Weeks');
-                    var daysTr = Yii.t('common', 'days');
-                    var Year = Yii.t('common', 'Year');
-                    var Month = Yii.t('common', 'Month');
-                    var Week = Yii.t('common', 'Week');
-                    var day = Yii.t('common', 'day');
-                    var compactY = Yii.t('common', 'y');
-                    var compactM = Yii.t('common', 'm');
-                    var compactW = Yii.t('common', 'w');
-                    var compactD = Yii.t('common', 'd');
-                    $.countdown.regionalOptions[window.language] = {
-                        labels: [Years, Months, Weeks, ' ' + daysTr + ' ', ':', ':', ''],
-                        labels1: [Year, Month, Week, ' ' + day + ' ', ':', ':', ''],
-                        labels2: [Years, Months, Weeks, ' ' + daysTr + ' ', ':', ':', ''],
-                        compactLabels: [compactY, compactM, compactW, compactD],
-                        whichLabels: null,
-                        digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                        timeSeparator: ':',
-                        isRTL: false
-                    };
-                    $.countdown.setDefaults($.countdown.regionalOptions[window.language]);
-                }
-
-				var now = window.nowTime ? window.nowTime : new Date();
-				var format = 'HMS';
-				var days = (finish - now) / (60 * 60 * 24 * 1000);
-				if (days > 1) {
-					format = 'D HMS';
-				}
-
-				var serverTime = function () {
-					return window.nowTime;
-				}
-
-				if ($countdownEl.countdown) {
-					$countdownEl.countdown({
-						until: finish,
-						lang: "en",
-						padZeroes: false,
-						compact: false,
-						format: format,
-						timezone: '180',
-						alwaysExpire: true,
-						expiryText: "",
-						onExpiry: function() {
-																				},
-						layout: '{d<}{dn} {dl}{d>} {hnn}{sep}{mnn}{sep}{snn}'
-					})
-				}
-                else {
-                }
+        (function() {
+            var el = document.getElementById('countdown1250581');
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function updateTimer() {
+                var now = new Date();
+                var endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+                var diff = endOfDay - now;
+                if (diff < 0) diff = 0;
+                var h = Math.floor(diff / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
+                el.textContent = '3 дня ' + pad(h) + ':' + pad(m) + ':' + pad(s);
             }
-
-        } );
-
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        })();
     </script>
 
 <style>
@@ -1207,84 +1154,26 @@ $( function() {
 	
 	
     <div class="f-header f-header-36">
-	            	        	            <span class="countdown-el is-countdown" id="countdown6090887">5  дней  08:48:13</span>
+        <span class="countdown-el is-countdown" id="countdown6090887">3 дня 00:00:00</span>
     </div>
 
     <script>
-        $( function() {
-            var $countdownEl = $("#countdown6090887")
-            $countdownEl.appendTo( this.element )
-
-            if ( finishDate = "2026-06-22 00:00" ) {
-                var a = finishDate.split(/[^0-9]/);
-
-                if ( a[2] > 2000) {
-                    var finish =new Date (a[2],a[1]-1,a[0],a[3],a[4], a[5] ? a[5] : 0 );
-                }
-                else {
-                    var finish =new Date (a[0],a[1]-1,a[2],a[3],a[4], a[5] ? a[5] : 0 );
-                }
-                if ( window.language == 'en' ) {
-                    $.countdown.setDefaults($.countdown.regionalOptions['en']);
-                }
-                if (window.language != 'en' && window.language != 'ru') {
-                    var Years = Yii.t('common', 'Years');
-                    var Months = Yii.t('common', 'Months');
-                    var Weeks = Yii.t('common', 'Weeks');
-                    var daysTr = Yii.t('common', 'days');
-                    var Year = Yii.t('common', 'Year');
-                    var Month = Yii.t('common', 'Month');
-                    var Week = Yii.t('common', 'Week');
-                    var day = Yii.t('common', 'day');
-                    var compactY = Yii.t('common', 'y');
-                    var compactM = Yii.t('common', 'm');
-                    var compactW = Yii.t('common', 'w');
-                    var compactD = Yii.t('common', 'd');
-                    $.countdown.regionalOptions[window.language] = {
-                        labels: [Years, Months, Weeks, ' ' + daysTr + ' ', ':', ':', ''],
-                        labels1: [Year, Month, Week, ' ' + day + ' ', ':', ':', ''],
-                        labels2: [Years, Months, Weeks, ' ' + daysTr + ' ', ':', ':', ''],
-                        compactLabels: [compactY, compactM, compactW, compactD],
-                        whichLabels: null,
-                        digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                        timeSeparator: ':',
-                        isRTL: false
-                    };
-                    $.countdown.setDefaults($.countdown.regionalOptions[window.language]);
-                }
-
-				var now = window.nowTime ? window.nowTime : new Date();
-				var format = 'HMS';
-				var days = (finish - now) / (60 * 60 * 24 * 1000);
-				if (days > 1) {
-					format = 'D HMS';
-				}
-
-				var serverTime = function () {
-					return window.nowTime;
-				}
-
-				if ($countdownEl.countdown) {
-					$countdownEl.countdown({
-						until: finish,
-						lang: "en",
-						padZeroes: false,
-						compact: false,
-						format: format,
-						timezone: '180',
-						alwaysExpire: true,
-						expiryText: "",
-						onExpiry: function() {
-																				},
-						layout: '{d<}{dn} {dl}{d>} {hnn}{sep}{mnn}{sep}{snn}'
-					})
-				}
-                else {
-                }
+        (function() {
+            var el = document.getElementById('countdown6090887');
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function updateTimer() {
+                var now = new Date();
+                var endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+                var diff = endOfDay - now;
+                if (diff < 0) diff = 0;
+                var h = Math.floor(diff / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
+                el.textContent = '3 дня ' + pad(h) + ':' + pad(m) + ':' + pad(s);
             }
-
-        } );
-
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        })();
     </script>
 
 <style>
@@ -5012,7 +4901,7 @@ $( function() {
 	<div class="lt-block-wrapper">
 	<div class="edit-block btn-settings ">
 						Ссылка на это место страницы:
-			<a class="anchor" data-anchor="form" name="form" id="form" href="https://usmanovafit.gymteam.ru/june_top5?utm_source=main&amp;utm_medium=usmanovafit&amp;utm_campaign=june_top5#form">
+			<a class="anchor" data-anchor="form" name="form" id="form" href="#form">
 				#form			</a>
 			</div>
 </div></div>
@@ -5302,84 +5191,26 @@ strong {
 	
 	
     <div class="f-header f-header-36">
-	            	        	            <span class="countdown-el is-countdown" id="countdown833638">5  дней  08:48:13</span>
+        <span class="countdown-el is-countdown" id="countdown833638">3 дня 00:00:00</span>
     </div>
 
     <script>
-        $( function() {
-            var $countdownEl = $("#countdown833638")
-            $countdownEl.appendTo( this.element )
-
-            if ( finishDate = "2026-06-22 00:00" ) {
-                var a = finishDate.split(/[^0-9]/);
-
-                if ( a[2] > 2000) {
-                    var finish =new Date (a[2],a[1]-1,a[0],a[3],a[4], a[5] ? a[5] : 0 );
-                }
-                else {
-                    var finish =new Date (a[0],a[1]-1,a[2],a[3],a[4], a[5] ? a[5] : 0 );
-                }
-                if ( window.language == 'en' ) {
-                    $.countdown.setDefaults($.countdown.regionalOptions['en']);
-                }
-                if (window.language != 'en' && window.language != 'ru') {
-                    var Years = Yii.t('common', 'Years');
-                    var Months = Yii.t('common', 'Months');
-                    var Weeks = Yii.t('common', 'Weeks');
-                    var daysTr = Yii.t('common', 'days');
-                    var Year = Yii.t('common', 'Year');
-                    var Month = Yii.t('common', 'Month');
-                    var Week = Yii.t('common', 'Week');
-                    var day = Yii.t('common', 'day');
-                    var compactY = Yii.t('common', 'y');
-                    var compactM = Yii.t('common', 'm');
-                    var compactW = Yii.t('common', 'w');
-                    var compactD = Yii.t('common', 'd');
-                    $.countdown.regionalOptions[window.language] = {
-                        labels: [Years, Months, Weeks, ' ' + daysTr + ' ', ':', ':', ''],
-                        labels1: [Year, Month, Week, ' ' + day + ' ', ':', ':', ''],
-                        labels2: [Years, Months, Weeks, ' ' + daysTr + ' ', ':', ':', ''],
-                        compactLabels: [compactY, compactM, compactW, compactD],
-                        whichLabels: null,
-                        digits: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-                        timeSeparator: ':',
-                        isRTL: false
-                    };
-                    $.countdown.setDefaults($.countdown.regionalOptions[window.language]);
-                }
-
-				var now = window.nowTime ? window.nowTime : new Date();
-				var format = 'HMS';
-				var days = (finish - now) / (60 * 60 * 24 * 1000);
-				if (days > 1) {
-					format = 'D HMS';
-				}
-
-				var serverTime = function () {
-					return window.nowTime;
-				}
-
-				if ($countdownEl.countdown) {
-					$countdownEl.countdown({
-						until: finish,
-						lang: "en",
-						padZeroes: false,
-						compact: false,
-						format: format,
-						timezone: '180',
-						alwaysExpire: true,
-						expiryText: "",
-						onExpiry: function() {
-																				},
-						layout: '{d<}{dn} {dl}{d>} {hnn}{sep}{mnn}{sep}{snn}'
-					})
-				}
-                else {
-                }
+        (function() {
+            var el = document.getElementById('countdown833638');
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function updateTimer() {
+                var now = new Date();
+                var endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0);
+                var diff = endOfDay - now;
+                if (diff < 0) diff = 0;
+                var h = Math.floor(diff / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
+                el.textContent = '3 дня ' + pad(h) + ':' + pad(m) + ':' + pad(s);
             }
-
-        } );
-
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        })();
     </script>
 
 <style>
@@ -6707,10 +6538,10 @@ $( function() {
   </div><br>
     
     <div class="police">
-        <a href="https://usmanovafit.gymteam.ru/cms/system/contact" rel="noreferrer">Служба заботы</a><br>
-        <a href="https://usmanovafit.gymteam.ru/oferta_fitnes" rel="noreferrer">Оферта</a><br>
-        <a href="https://usmanovafit.gymteam.ru/protection_fitnes" target="_blank" rel="noreferrer">Политика конфиденциальности</a><br>
- <a href="https://usmanovafit.gymteam.ru/personaldata" target="_blank" rel="noreferrer">Согласие на обработку персональных данных</a>
+        <a href="#" rel="noreferrer">Служба заботы</a><br>
+        <a href="#" rel="noreferrer">Оферта</a><br>
+        <a href="#" target="_blank" rel="noreferrer">Политика конфиденциальности</a><br>
+ <a href="#" target="_blank" rel="noreferrer">Согласие на обработку персональных данных</a>
     </div>
 
     
@@ -6744,8 +6575,8 @@ $( function() {
 							" data-id="2235861150" action="/api/submit" method="post" data-open-new-window="0" data-sequential-request="1">
 	<input type="hidden" name="formParams[setted_offer_id]" class="external-value offer_id">
 	<input type="hidden" name="formParams[willCreatePaidDeal]" value="1">
-				<input type="hidden" name="__gc__internal__form__helper" value="https://usmanovafit.gymteam.ru/june_top5?utm_source=main&amp;utm_medium=usmanovafit&amp;utm_campaign=june_top5">
-		<input type="hidden" name="__gc__internal__form__helper_ref" value="https://usmanovafit.gymteam.ru/mainpage">
+				<input type="hidden" name="__gc__internal__form__helper" value="">
+		<input type="hidden" name="__gc__internal__form__helper_ref" value="">
 			
 			<div class="form-result-block"></div>
 	
@@ -7018,6 +6849,15 @@ $( function() {
 <input type="hidden" name="formParams[clarity_uid]" value="AGkiYX0_LOA1BLmYNyfoeIg3CqFkPCdC" style="display:none;position:absolute;width:0;max-width:0;height:0;max-height:0;left:-999999999px;pointer-events:none;vizability:hidden;"></form>
 <script>
 	$( function() {
+		var apiBase = window.API_BASE || '';
+		$('#ltForm144649').attr('action', apiBase + '/api/submit');
+		$('#ltForm144649').on('submit', function(e) {
+			if (!validateFormFields(this)) {
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			}
+		});
 		$('#ltForm144649').liteForm();
 	} );
 </script>
@@ -7091,7 +6931,7 @@ $( function() {
 							" data-id="2235861150" action="javascript:void(0)" method="post" data-open-new-window="0" data-sequential-request="1">
 	<input type="hidden" name="formParams[setted_offer_id]" class="external-value offer_id">
 	<input type="hidden" name="formParams[willCreatePaidDeal]" value="1">
-				<input type="hidden" name="__gc__internal__form__helper" value="https://usmanovafit.gymteam.ru/june_top5?utm_source=main&amp;utm_medium=usmanovafit&amp;utm_campaign=june_top5">
+				<input type="hidden" name="__gc__internal__form__helper" value="">
 		<input type="hidden" name="__gc__internal__form__helper_ref" value="">
 
 			<div class="form-result-block"></div>
@@ -7445,10 +7285,49 @@ $( function() {
 	} );
 </script>
 <script>
+	function validateFormFields(form) {
+		var valid = true;
+		form.querySelectorAll('.f-input').forEach(function(input) {
+			input.style.borderColor = '';
+		});
+		form.querySelectorAll('.field-error-msg').forEach(function(el) { el.remove(); });
+
+		function showError(input, msg) {
+			input.style.borderColor = '#ff0000';
+			var err = document.createElement('div');
+			err.className = 'field-error-msg';
+			err.style.cssText = 'color:#ff0000;font-size:13px;margin-top:4px;text-align:left;';
+			err.textContent = msg;
+			input.parentNode.appendChild(err);
+			valid = false;
+		}
+
+		var nameInput = form.querySelector('input[name="formParams[full_name]"]');
+		if (nameInput && !nameInput.value.trim()) {
+			showError(nameInput, 'Введите ваше имя');
+		}
+
+		var emailInput = form.querySelector('input[name="formParams[email]"]');
+		var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (emailInput && !emailRe.test(emailInput.value.trim())) {
+			showError(emailInput, 'Введите корректный e-mail');
+		}
+
+		var phoneInput = form.querySelector('input[name="formParams[phone]"]');
+		if (phoneInput) {
+			var raw = phoneInput.value.replace(/[\s\-\(\)]/g, '');
+			if (!/^\+7\d{10}$/.test(raw)) {
+				showError(phoneInput, 'Введите номер в формате +7XXXXXXXXXX');
+			}
+		}
+
+		return valid;
+	}
 	function goToPayment(e) {
 		e.preventDefault();
 		e.stopPropagation();
 		var form = document.getElementById('ltForm3926363');
+		if (!validateFormFields(form)) return;
 		var name = form.querySelector('input[name="formParams[full_name]"]').value || '';
 		var email = form.querySelector('input[name="formParams[email]"]').value || '';
 		var phone = form.querySelector('input[name="formParams[phone]"]').value || '';
@@ -7472,7 +7351,7 @@ $( function() {
                             </div>
                         </div>
                     </div>
-                    <div class="close-btn"><i class="fa fa-times"></i></div>
+                    <div class="close-btn"><i class="fa-solid fa-xmark"></i></div>
                 </div>
 
 <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" style="display: none;"><div class="slides next-click"></div><h3 class="title"></h3><a class="prev">‹</a><a class="next next-click">›</a><a class="play-pause"></a><ol class="indicator"></ol></div>

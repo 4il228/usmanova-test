@@ -17,7 +17,7 @@
 
 			if (!isMobile) {
 				//e.preventDefault();
-				const delayUrl = '/pl/vk/redirect/delay';
+				const delayUrl = (window.API_BASE || '') + '/pl/vk/redirect/delay';
 				fetch(delayUrl, {
 					method: 'POST',
 					mode: 'cors',

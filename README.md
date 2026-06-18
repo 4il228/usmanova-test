@@ -32,13 +32,12 @@
 
 ```bash
 npm install
-npm start
 ```
 
-Откройте в браузере:
-- [http://localhost:3000/index.html](http://localhost:3000/index.html) — Главная
-- [http://localhost:3000/june_top5.html](http://localhost:3000/june_top5.html) — Подробнее
-- [http://localhost:3000/payment.html](http://localhost:3000/payment.html) — Оплата
+Затем запустите скрипт для вашей ОС:
+
+- **Windows:** `start.bat` — поднимает локальный сервер и открывает браузер
+- **macOS / Linux:** `bash start.sh` — аналогичный скрипт для Unix-систем
 
 ---
 
